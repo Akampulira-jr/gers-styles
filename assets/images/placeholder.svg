@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-labelledby="title description">
+  <title id="title">GERS STYLES image placeholder</title>
+  <desc id="description">A temporary graphic reserved for future authentic GERS STYLES photography.</desc>
+  <rect width="1200" height="1500" fill="#6B1F32"/>
+  <path d="M930 1450 670 1450 500 400 760 210Z" fill="#B85C45"/>
+  <circle cx="820" cy="520" r="210" fill="none" stroke="#D8C3A5" stroke-width="55"/>
+  <path d="M0 1160 510 1000 580 1500H0Z" fill="#D8C3A5"/>
+  <text x="80" y="1320" fill="#F7F1E7" font-family="Georgia, serif" font-size="128" letter-spacing="22">GERS</text>
+  <text x="85" y="1400" fill="#F7F1E7" font-family="Arial, sans-serif" font-size="32" letter-spacing="7">IMAGE PLACEHOLDER</text>
+</svg>

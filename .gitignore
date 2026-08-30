@@ -1,0 +1,11 @@
+# Dependencies and Netlify local state
+node_modules/
+.netlify/
+
+# Local environment values and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
