@@ -1,6 +1,7 @@
 # Dependencies and Netlify local state
 node_modules/
 .netlify/
+deno.lock
 
 # Local environment values and secrets
 .env
