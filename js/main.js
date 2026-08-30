@@ -67,7 +67,7 @@ if (contactForm) {
     field.addEventListener("change", () => field.setCustomValidity(""));
   });
 
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!contactForm.checkValidity()) {
       contactForm.reportValidity();
@@ -76,11 +76,54 @@ if (contactForm) {
 
     if (contactForm.elements.website.value) return;
 
-    if (contactFormStatus) {
-      contactFormStatus.textContent = "Inquiry submission will be available once the form service or backend is connected.";
-    }
-
     contactFormSuccess?.setAttribute("hidden", "");
     contactFormError?.setAttribute("hidden", "");
+
+    const payload = {
+      name: contactForm.elements["full-name"].value,
+      phone: contactForm.elements.phone.value,
+      email: contactForm.elements.email.value,
+      service: contactForm.elements.interest.value,
+      quantity: contactForm.elements.quantity.value,
+      message: contactForm.elements.message.value,
+      website: contactForm.elements.website.value,
+    };
+
+    try {
+      const response = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch {
+        // Use a safe fallback message if the server does not return JSON.
+      }
+
+      if (response.ok && result.success) {
+        if (contactFormStatus) {
+          contactFormStatus.textContent = "Your inquiry was validated successfully. Delivery setup is still being completed.";
+        }
+        contactFormSuccess?.removeAttribute("hidden");
+        return;
+      }
+
+      if (contactFormStatus) {
+        contactFormStatus.textContent = response.status === 422
+          ? "Please check the information you entered."
+          : "We couldn't process your inquiry. Please try again or contact us directly on WhatsApp.";
+      }
+      contactFormError?.removeAttribute("hidden");
+    } catch {
+      if (contactFormStatus) {
+        contactFormStatus.textContent = "We couldn't process your inquiry. Please try again or contact us directly on WhatsApp.";
+      }
+      contactFormError?.removeAttribute("hidden");
+    }
   });
 }
