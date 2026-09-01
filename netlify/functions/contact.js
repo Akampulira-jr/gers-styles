@@ -3,6 +3,7 @@
 const { createHmac } = require("node:crypto");
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FROM_EMAIL_PATTERN = /^(?:[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+|[^<>\r\n]+\s+<[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+>)$/;
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const REQUEST_BODY_LIMIT = 16 * 1024;
 const RESEND_TIMEOUT_MS = 10_000;
@@ -128,7 +129,7 @@ function getEmailConfig() {
     !contactEmail ||
     !EMAIL_PATTERN.test(contactEmail) ||
     !fromEmail ||
-    !EMAIL_PATTERN.test(fromEmail)
+    !FROM_EMAIL_PATTERN.test(fromEmail)
   ) {
     return null;
   }

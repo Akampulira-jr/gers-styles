@@ -40,8 +40,8 @@ function eventFor(body, overrides = {}) {
 
 function configureEmail() {
   process.env.RESEND_API_KEY = "re_test_key";
-  process.env.CONTACT_EMAIL = "inquiries@example.com";
-  process.env.CONTACT_FROM_EMAIL = "website@example.com";
+  process.env.CONTACT_EMAIL = "hello@gersstyles.com";
+  process.env.CONTACT_FROM_EMAIL = "GERS STYLES <website@gersstyles.com>";
 }
 
 function responseBody(response) {
@@ -132,8 +132,8 @@ test("sends a normalized and escaped inquiry to Resend", async () => {
   assert.equal(request.options.headers.Authorization, "Bearer re_test_key");
   assert.match(request.options.headers["Idempotency-Key"], /^gers-contact-[a-f0-9]{64}$/);
   assert.doesNotMatch(request.options.headers["Idempotency-Key"], /Amina|example/);
-  assert.deepEqual(providerBody.to, ["inquiries@example.com"]);
-  assert.equal(providerBody.from, "website@example.com");
+  assert.deepEqual(providerBody.to, ["hello@gersstyles.com"]);
+  assert.equal(providerBody.from, "GERS STYLES <website@gersstyles.com>");
   assert.equal(providerBody.reply_to, "amina@example.com");
   assert.match(providerBody.text, /<Amina & Co>/);
   assert.match(providerBody.html, /&lt;Amina &amp; Co&gt;/);
