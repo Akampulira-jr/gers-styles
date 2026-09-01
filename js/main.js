@@ -50,6 +50,8 @@ const contactFormSuccess = document.querySelector("[data-contact-form-success]")
 const contactFormError = document.querySelector("[data-contact-form-error]");
 
 if (contactForm) {
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  let isSubmitting = false;
   const validationMessages = {
     "full-name": "Please enter your name.",
     phone: "Please enter your phone number.",
@@ -69,6 +71,8 @@ if (contactForm) {
 
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
     if (!contactForm.checkValidity()) {
       contactForm.reportValidity();
       return;
@@ -76,6 +80,8 @@ if (contactForm) {
 
     if (contactForm.elements.website.value) return;
 
+    isSubmitting = true;
+    if (submitButton) submitButton.disabled = true;
     contactFormSuccess?.setAttribute("hidden", "");
     contactFormError?.setAttribute("hidden", "");
 
@@ -107,8 +113,9 @@ if (contactForm) {
 
       if (response.ok && result.success) {
         if (contactFormStatus) {
-          contactFormStatus.textContent = "Your inquiry was validated successfully. Delivery setup is still being completed.";
+          contactFormStatus.textContent = "Thank you. Your inquiry has been sent successfully. The GERS STYLES team will get back to you as soon as possible.";
         }
+        contactForm.reset();
         contactFormSuccess?.removeAttribute("hidden");
         return;
       }
@@ -116,14 +123,17 @@ if (contactForm) {
       if (contactFormStatus) {
         contactFormStatus.textContent = response.status === 422
           ? "Please check the information you entered."
-          : "We couldn't process your inquiry. Please try again or contact us directly on WhatsApp.";
+          : "We couldn’t send your inquiry right now. Please try again shortly.";
       }
       contactFormError?.removeAttribute("hidden");
     } catch {
       if (contactFormStatus) {
-        contactFormStatus.textContent = "We couldn't process your inquiry. Please try again or contact us directly on WhatsApp.";
+        contactFormStatus.textContent = "We couldn’t send your inquiry right now. Please try again shortly.";
       }
       contactFormError?.removeAttribute("hidden");
+    } finally {
+      isSubmitting = false;
+      if (submitButton) submitButton.disabled = false;
     }
   });
 }
