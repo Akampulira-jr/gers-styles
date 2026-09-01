@@ -84,6 +84,7 @@ if (contactForm) {
     if (submitButton) submitButton.disabled = true;
     contactFormSuccess?.setAttribute("hidden", "");
     contactFormError?.setAttribute("hidden", "");
+    if (contactFormStatus) contactFormStatus.textContent = "";
 
     const payload = {
       name: contactForm.elements["full-name"].value,
