@@ -989,10 +989,6 @@ body.menu-open {
 .text-link--light {
   color: var(--color-cream);
 }
-.contact-placeholder {
-  font-size: var(--font-size-label);
-  letter-spacing: 0.04em;
-}
 .contact__content {
   display: grid;
   width: 100%;
