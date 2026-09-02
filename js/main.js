@@ -46,7 +46,6 @@ document.querySelectorAll("[data-current-year]").forEach((year) => {
 
 const contactForm = document.querySelector("[data-contact-form]");
 const contactFormStatus = document.querySelector("[data-contact-form-status]");
-const contactFormSuccess = document.querySelector("[data-contact-form-success]");
 const contactFormError = document.querySelector("[data-contact-form-error]");
 
 if (contactForm) {
@@ -82,7 +81,6 @@ if (contactForm) {
 
     isSubmitting = true;
     if (submitButton) submitButton.disabled = true;
-    contactFormSuccess?.setAttribute("hidden", "");
     contactFormError?.setAttribute("hidden", "");
     if (contactFormStatus) contactFormStatus.textContent = "";
 
@@ -113,11 +111,7 @@ if (contactForm) {
       }
 
       if (response.ok && result.success) {
-        if (contactFormStatus) {
-          contactFormStatus.textContent = "Thank you. Your inquiry has been sent successfully. The GERS STYLES team will get back to you as soon as possible.";
-        }
-        contactForm.reset();
-        contactFormSuccess?.removeAttribute("hidden");
+        window.location.href = "/thank-you.html";
         return;
       }
 

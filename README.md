@@ -1,126 +1,138 @@
-# Gers Styles — Fashion & Design Website
+# GERS STYLES
 
-## Current Status
+A professional fashion and tailoring website for GERS STYLES, serving customers in Kampala and Fort Portal, Uganda.
 
-The homepage is substantially complete.
+## Live Website
 
-### Completed
+[https://gersstyles.com](https://gersstyles.com)
 
-- Semantic HTML5 homepage structure
-- Responsive header and navigation
-- Desktop navigation above 768px
-- Hamburger navigation at 768px and below
-- Hero section
-- Brand introduction
-- Featured collections
-- Why Choose Gers Styles section
-- Custom design section
-- Gallery structure
-- How It Works section
-- About section
-- Final CTA
-- Footer
-- Responsive layout
-- Accessibility foundations
-- Basic SEO foundation
-- Image replacement structure
-- Contact/inquiry form frontend structure and validation
-- Enlarged process step numbers for improved visibility
+## About
 
-### Remaining Work
+The website showcases GERS STYLES services and work across:
 
-- Add real Gers Styles photography
-- Add real contact information
-- Connect the contact/inquiry form to the backend endpoint and add an email submission service
-- Replace temporary imagery
-- Perform final responsive testing
-- Perform final accessibility review
-- Perform final performance and SEO review
-- Prepare the website for deployment
+- Traditional wear
+- Formal wear
+- School uniforms
+- Corporate and work uniforms
+- Medical scrubs
+- Sweaters and school wear
+- Custom tailoring
 
-### Contact Form Status
+## Features
 
-- Includes name, phone/WhatsApp, optional email, service interest, optional quantity, and message fields.
-- Native browser validation and concise custom validation messages are included.
-- The frontend form is not connected to the backend endpoint yet; email delivery must be configured before launch.
+- Responsive, semantic HTML5 layout
+- Desktop and mobile navigation
+- Service and collection showcase
+- About section and image gallery
+- Native, accessible FAQ accordion
+- Customer inquiry and contact form
+- WhatsApp contact integration
+- Secure serverless contact form processing
+- Branded thank-you and custom 404 pages
+- Privacy Policy and Terms of Service
+- Accessibility-conscious markup, focus states, and interactions
+- Responsive image handling
+- Production HTTPS and custom domain
 
-## Backend
+## Contact Form Architecture
 
-Current status:
+The inquiry flow is:
 
-- Netlify serverless contact endpoint created.
-- Server-side validation implemented.
-- Email provider not connected yet.
-- Database not connected.
-- Frontend form not connected yet.
+```text
+Frontend form → Netlify Function → Resend → Business email
+```
 
-## Brand Identity
+The frontend submits JSON to `/netlify/functions/contact`. The function validates and normalizes the request before sending it through Resend.
 
-Primary palette:
+The deployment requires these environment variables by name:
 
-- Burgundy
-- Terracotta
-- Sand
-- Cream
-- Dark Brown
+- `RESEND_API_KEY`
+- `CONTACT_EMAIL`
+- `CONTACT_FROM_EMAIL`
 
-Suggested colors:
+Real values must remain in local or deployment environment configuration and must not be committed.
 
-- Burgundy: `#7A1F2B`
-- Terracotta: `#B65A3A`
-- Sand: `#D8C3A5`
-- Cream: `#F7F1E7`
-- Dark Brown: `#2B211C`
+## Project Structure
 
-Brand direction: premium African fashion, modern tailoring, and elegant editorial presentation.
+```text
+.
+├── index.html
+├── privacy-policy.html
+├── terms-of-service.html
+├── thank-you.html
+├── 404.html
+├── assets/
+│   └── images/
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── netlify/
+│   └── functions/
+│       └── contact.js
+├── test/
+│   └── contact.test.js
+├── .env.example
+└── package.json
+```
 
-## Navigation
+## Technologies
 
-The primary responsive navigation breakpoint is 768px.
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Node.js test runner
+- Netlify
+- Netlify Functions
+- Resend
+- Cloudflare DNS and Email Routing
 
-- Above 768px: full desktop navigation is displayed.
-- At 768px and below: hamburger/mobile navigation is displayed.
+The website remains dependency-free at runtime.
 
-## HTML Requirements
+## Local Development
 
-Use semantic HTML5 elements throughout the project.
+Run the Netlify local development environment:
 
-- One `<main>` element
-- One primary `<h1>`
-- Logical heading hierarchy
-- Appropriate semantic elements such as `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<figure>`, and `<footer>`
+```powershell
+npm run dev
+```
 
-## Image Policy
+Run the test suite:
 
-Temporary imagery must never be presented as genuine Gers Styles work. Approved Gers Styles photography should replace temporary imagery when it becomes available.
+```powershell
+npm.cmd test
+```
 
-Expected image categories:
+Local contact-form delivery requires the environment variables listed in `.env.example`.
 
-- Hero
-- Traditional Wear
-- Suits & Formal Wear
-- School Uniforms
-- Medical Scrubs
-- Corporate/Work Uniforms
-- Sweaters & School Wear
-- Custom Tailoring
-- Gallery
+## Testing
 
-The local image folder includes a replacement guide at `assets/images/README.md`.
+The repository includes a Node test suite for the contact function. It covers request methods, JSON parsing, field validation, honeypot handling, missing configuration, normalized email delivery, provider errors, allowed services, request-size limits, and content types.
 
-## Development Principles
+```powershell
+npm.cmd test
+```
 
-- Keep the code maintainable.
-- Avoid unnecessary dependencies.
-- Avoid unnecessary CSS duplication.
-- Keep JavaScript lightweight.
-- Preserve existing functionality when making changes.
-- Do not invent business information.
-- Do not fabricate testimonials, awards, clients, certifications, locations, phone numbers, emails, or social accounts.
-- Inspect existing code before making modifications.
+## Deployment
 
-## Future Development
+- Source is hosted on GitHub.
+- Production is deployed through Netlify.
+- Pushes to the production branch trigger deployment.
+- The custom production domain is [https://gersstyles.com](https://gersstyles.com).
 
-The current project is intentionally a one-page website. It should remain structured so additional pages can be added later if the business requires them.
+## Brand and Development Principles
 
-Last project status: Homepage substantially complete; real imagery and contact information are still required.
+The visual system uses burgundy, terracotta, sand, cream, and dark brown to support a premium African fashion and editorial direction. The primary responsive navigation breakpoint is 768px.
+
+The project uses plain HTML, CSS, and JavaScript. Shared tokens and reusable component foundations live in `css/style.css`; dependencies and unconfirmed business information should not be introduced without approval.
+
+## Business Contact
+
+- Email: [hello@gersstyles.com](mailto:hello@gersstyles.com)
+- Phone / WhatsApp: [+256 788 583 923](tel:+256788583923)
+- Location: Kampala & Fort Portal, Uganda
+- Opening hours: Monday–Saturday, 7:00 AM–6:00 PM
+
+## Credits
+
+Designed & Developed by [Elevate Business Solutions](https://elevatebusinesssolutions.dev)
