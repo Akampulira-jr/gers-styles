@@ -1273,6 +1273,83 @@ body.menu-open {
   box-shadow: none;
 }
 
+.back-to-top {
+  position: fixed;
+  z-index: 15;
+  right: calc(0.875rem + env(safe-area-inset-right, 0px));
+  bottom: calc(var(--space-xl) + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  width: 3.125rem;
+  height: 3.125rem;
+  padding: 0;
+  border: var(--border-width) solid var(--color-burgundy);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-burgundy) 75%, transparent);
+  box-shadow: 0 0.25rem 0.875rem
+    color-mix(in srgb, var(--color-dark-brown) 22%, transparent);
+  color: var(--color-cream);
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0;
+  place-items: center;
+  pointer-events: none;
+  transform: translateY(var(--space-sm));
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+  visibility: hidden;
+}
+
+.back-to-top svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.25;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.back-to-top.is-visible:hover {
+  background: color-mix(in srgb, var(--color-burgundy) 92%, transparent);
+  box-shadow: 0 0.4rem 1rem
+    color-mix(in srgb, var(--color-dark-brown) 30%, transparent);
+  transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+  background: color-mix(in srgb, var(--color-burgundy) 92%, transparent);
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-cream),
+    0 0 0 5px var(--color-dark-brown);
+}
+
+.back-to-top.is-visible:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top.is-visible:hover {
+    transform: translateY(0);
+  }
+}
+
+body.menu-open .back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 /* Standalone legal and status pages */
 .page-shell {
   display: flex;
@@ -1413,6 +1490,13 @@ body.menu-open {
 }
 
 @media (max-width: 35.999rem) {
+  .back-to-top {
+    right: calc(0.75rem + env(safe-area-inset-right, 0px));
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    width: 2.875rem;
+    height: 2.875rem;
+  }
+
   .page-header__inner .button {
     min-height: 2.75rem;
     padding-inline: var(--space-md);

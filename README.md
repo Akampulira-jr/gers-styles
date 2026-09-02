@@ -22,6 +22,8 @@ The website showcases GERS STYLES services and work across:
 
 - Responsive, semantic HTML5 layout
 - Desktop and mobile navigation
+- Accessible Back to Top control with smooth scrolling, reduced-motion support,
+  and responsive positioning
 - Service and collection showcase
 - About section and image gallery
 - Native, accessible FAQ accordion

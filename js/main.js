@@ -44,6 +44,35 @@ document.querySelectorAll("[data-current-year]").forEach((year) => {
   year.textContent = String(new Date().getFullYear());
 });
 
+const backToTopButton = document.querySelector("[data-back-to-top]");
+
+if (backToTopButton) {
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let scrollUpdatePending = false;
+
+  function updateBackToTopButton() {
+    backToTopButton.classList.toggle("is-visible", window.scrollY >= 600);
+    scrollUpdatePending = false;
+  }
+
+  backToTopButton.hidden = false;
+  updateBackToTopButton();
+
+  window.addEventListener("scroll", () => {
+    if (scrollUpdatePending) return;
+
+    scrollUpdatePending = true;
+    window.requestAnimationFrame(updateBackToTopButton);
+  }, { passive: true });
+
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: reducedMotionQuery.matches ? "auto" : "smooth",
+    });
+  });
+}
+
 const contactForm = document.querySelector("[data-contact-form]");
 const contactFormStatus = document.querySelector("[data-contact-form-status]");
 const contactFormError = document.querySelector("[data-contact-form-error]");
