@@ -59,12 +59,14 @@ Real values must remain in local or deployment environment configuration and mus
 ```text
 .
 ├── index.html
+├── 404.html
 ├── privacy-policy.html
 ├── terms-of-service.html
 ├── thank-you.html
-├── 404.html
 ├── assets/
-│   └── images/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
 ├── css/
 │   └── style.css
 ├── js/
@@ -75,7 +77,10 @@ Real values must remain in local or deployment environment configuration and mus
 ├── test/
 │   └── contact.test.js
 ├── .env.example
-└── package.json
+├── .gitignore
+├── package.json
+├── README.md
+└── AGENTS.md
 ```
 
 ## Technologies
